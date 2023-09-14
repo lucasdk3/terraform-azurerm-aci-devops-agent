@@ -16,7 +16,7 @@ data "azurerm_subnet" "subnet" {
   count                = var.enable_vnet_integration ? 1 : 0
   name                 = azurerm_subnet.aci-subnet.name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  resource_group_name  = azurerm_resource_group.vnet-rg.name
+  resource_group_name  = var.resource_group_name
 }
 
 locals {
