@@ -14,9 +14,9 @@ data "azurerm_resource_group" "rg" {
 data "azurerm_subnet" "subnet" {
   # the subnet is imported only enable_vnet_integration is true
   count                = var.enable_vnet_integration ? 1 : 0
-  name                 = var.subnet_name
-  virtual_network_name = var.vnet_name
-  resource_group_name  = var.vnet_resource_group_name
+  name                 = azurerm_subnet.aci-subnet.name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  resource_group_name  = azurerm_resource_group.vnet-rg.name
 }
 
 locals {
