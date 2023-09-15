@@ -32,7 +32,7 @@ locals {
 
 resource "azurerm_network_profile" "linux_network_profile" {
   count               = var.enable_vnet_integration ? var.linux_agents_configuration.count : 0
-  name                = linuxvnetprofile${count.index}
+  name                = "linuxvnetprofile${count.index}"
   location            = var.location
   resource_group_name = var.create_resource_group ? azurerm_resource_group.rg[0].name : data.azurerm_resource_group.rg[0].name
 
