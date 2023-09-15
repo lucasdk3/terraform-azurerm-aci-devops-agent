@@ -78,6 +78,12 @@ resource "azurerm_container_group" "linux-container-group" {
     }
   }
 
+  image_registry_credential {
+        server = var.docker_server
+        username = var.docker_username
+        password = var.docker_password
+    }
+
   # if an image registry server has been specified, then generate the image_registry_credential block.
   dynamic "image_registry_credential" {
     for_each = var.image_registry_credential.server == "" ? [] : [1]
