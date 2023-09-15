@@ -48,7 +48,7 @@ resource "azurerm_network_profile" "linux_network_profile" {
 
 resource "azurerm_container_group" "linux-container-group" {
   count               = var.linux_agents_configuration.count
-  name                = ${var.linux_agents_configuration.agent_name_prefix}-${count.index}
+  name                = "${var.linux_agents_configuration.agent_name_prefix}-${count.index}"
   location            = var.location
   resource_group_name = var.create_resource_group ? azurerm_resource_group.rg[0].name : data.azurerm_resource_group.rg[0].name
   ip_address_type     = var.enable_vnet_integration ? "Private" : "Public"
@@ -56,8 +56,8 @@ resource "azurerm_container_group" "linux-container-group" {
   subnet_ids          = var.enable_vnet_integration ? [azurerm_network_profile.linux_network_profile[count.index].id] : null
 
   container {
-    name   = ${var.linux_agents_configuration.agent_name_prefix}-${count.index}
-    image  = ${var.linux_agents_configuration.docker_image}:${var.linux_agents_configuration.docker_tag}
+    name   = "${var.linux_agents_configuration.agent_name_prefix}-${count.index}"
+    image  = "${var.linux_agents_configuration.docker_image}:${var.linux_agents_configuration.docker_tag}"
     cpu    = var.linux_agents_configuration.cpu
     memory = var.linux_agents_configuration.memory
 
@@ -70,7 +70,7 @@ resource "azurerm_container_group" "linux-container-group" {
     environment_variables = {
       AZP_URL        = "https://dev.azure.com/${var.azure_devops_org_name}"
       AZP_POOL       = var.linux_agents_configuration.agent_pool_name
-      AZP_AGENT_NAME = ${var.linux_agents_configuration.agent_name_prefix}-${count.index}
+      AZP_AGENT_NAME = "${var.linux_agents_configuration.agent_name_prefix}-${count.index}"
     }
 
     secure_environment_variables = {
@@ -156,7 +156,7 @@ resource "azurerm_container_group" "windows-container-group" {
     environment_variables = {
       AZP_URL        = "https://dev.azure.com/${var.azure_devops_org_name}"
       AZP_POOL       = var.windows_agents_configuration.agent_pool_name
-      AZP_AGENT_NAME = ${var.windows_agents_configuration.agent_name_prefix}-${count.index}
+      AZP_AGENT_NAME = "${var.windows_agents_configuration.agent_name_prefix}-${count.index}"
     }
     secure_environment_variables = {
       AZP_TOKEN = var.azure_devops_personal_access_token
