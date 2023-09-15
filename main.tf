@@ -53,7 +53,7 @@ resource "azurerm_container_group" "linux-container-group" {
   resource_group_name = var.create_resource_group ? azurerm_resource_group.rg[0].name : data.azurerm_resource_group.rg[0].name
   ip_address_type     = var.enable_vnet_integration ? "Private" : "Public"
   os_type             = "Linux"
-  subnet_ids          = var.enable_vnet_integration ? [azurerm_network_profile.linux_network_profile[count.index].id] : null
+  subnet_ids          = var.enable_vnet_integration ? [data.azurerm_subnet.subnet[0].id] : null
 
   container {
     name   = "${var.linux_agents_configuration.agent_name_prefix}-${count.index}"
@@ -139,7 +139,7 @@ resource "azurerm_container_group" "windows-container-group" {
   resource_group_name = var.create_resource_group ? azurerm_resource_group.rg[0].name : data.azurerm_resource_group.rg[0].name
   ip_address_type     = var.enable_vnet_integration ? "Private" : "Public"
   os_type             = "Windows"
-  subnet_ids          = var.enable_vnet_integration ? [azurerm_network_profile.windows_network_profile[count.index].id] : null
+  subnet_ids          = var.enable_vnet_integration ? [data.azurerm_subnet.subnet[0].id] : null
 
   container {
     name   = "${var.windows_agents_configuration.agent_name_prefix}-${count.index}"
