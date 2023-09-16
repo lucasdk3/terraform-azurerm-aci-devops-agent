@@ -84,6 +84,11 @@ resource "azurerm_container_group" "linux-container-group" {
     secure_environment_variables = {
       AZP_TOKEN = var.azure_devops_personal_access_token
     }
+
+    volume {
+      name = "docker-sock"
+      mount_path = "/var/run/docker.sock"
+    }
   }
 
   image_registry_credential {
