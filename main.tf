@@ -85,6 +85,10 @@ resource "azurerm_container_group" "linux-container-group" {
       AZP_TOKEN = var.azure_devops_personal_access_token
     }
 
+    security {
+      privilege_enabled = true
+    }
+
     volume {
       name = "docker-sock"
       mount_path = "/var/run/docker.sock"
