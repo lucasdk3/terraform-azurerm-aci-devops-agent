@@ -89,6 +89,7 @@ resource "azurerm_container_group" "linux-container-group" {
       name = "docker-sock"
       mount_path = "/var/run/docker.sock"
       read_only  = false
+      empty_dir = false
     }
   }
 
