@@ -8,6 +8,22 @@ variable "location" {
   description = "The Azure location to use for deployment"
 }
 
+variable "docker_server" {
+  type        = string
+  description = "Docker server"
+}
+
+variable "docker_username" {
+  type        = string
+  description = "Docker username"
+}
+
+variable "docker_password" {
+  type        = string
+  description = "Docker password"
+}
+
+
 variable "create_resource_group" {
   type        = bool
   default     = true
